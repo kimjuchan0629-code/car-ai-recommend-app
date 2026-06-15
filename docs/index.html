@@ -31,7 +31,6 @@ h1 {
     color:#555;
 }
 
-
 .card {
     background:white;
     padding:25px;
@@ -59,7 +58,7 @@ h1 {
 
 input, select {
     padding:12px;
-    margin:10px;
+    margin:8px;
     border-radius:8px;
     border:1px solid #ccc;
 }
@@ -76,11 +75,6 @@ button {
 }
 
 
-button:hover {
-    background:#1d4ed8;
-}
-
-
 .download {
     display:inline-block;
     margin-top:25px;
@@ -92,6 +86,7 @@ button:hover {
 }
 
 
+
 /* 자동차 모형 */
 
 .car {
@@ -100,7 +95,6 @@ button:hover {
     margin:30px auto;
     position:relative;
 }
-
 
 .body {
     position:absolute;
@@ -112,7 +106,6 @@ button:hover {
     border-radius:25px 35px 10px 10px;
 }
 
-
 .window {
     position:absolute;
     width:80px;
@@ -123,7 +116,6 @@ button:hover {
     border-radius:10px;
 }
 
-
 .wheel {
     position:absolute;
     width:35px;
@@ -133,14 +125,17 @@ button:hover {
     bottom:0;
 }
 
-
 .left {
     left:45px;
 }
 
-
 .right {
     right:45px;
+}
+
+
+.qr {
+    width:200px;
 }
 
 
@@ -155,7 +150,6 @@ footer {
 
 
 <body>
-
 
 <div class="container">
 
@@ -175,7 +169,8 @@ footer {
 <h1>🚗 AI 자동차 추천 앱</h1>
 
 <p class="subtitle">
-AI가 사용자의 조건에 맞는 자동차를 추천합니다.
+사용자의 조건과 라이프스타일을 분석하여
+최적의 자동차를 추천합니다.
 </p>
 
 
@@ -185,8 +180,8 @@ AI가 사용자의 조건에 맞는 자동차를 추천합니다.
 <h2>서비스 소개</h2>
 
 <p>
-예산과 선호 조건을 분석하여
-가장 적합한 자동차를 추천하는 서비스입니다.
+AI 기반 자동차 추천 서비스로
+예산, 선호 차종, 생활 패턴을 분석합니다.
 </p>
 
 </div>
@@ -198,26 +193,22 @@ AI가 사용자의 조건에 맞는 자동차를 추천합니다.
 
 <h2>주요 기능</h2>
 
-
 <div class="features">
 
 <div class="feature">
 🤖 AI 추천<br>
-맞춤 차량 추천
+맞춤 차량 분석
 </div>
-
 
 <div class="feature">
 💰 예산 분석<br>
-가격 비교
+가격 조건 비교
 </div>
-
 
 <div class="feature">
-🚘 차량 정보<br>
-차량 특징 분석
+🏠 라이프스타일<br>
+사용 목적 분석
 </div>
-
 
 </div>
 
@@ -229,12 +220,10 @@ AI가 사용자의 조건에 맞는 자동차를 추천합니다.
 
 <div class="card">
 
-
-<h2>🚘 자동차 추천 체험</h2>
-
+<h2>🤖 AI 자동차 추천</h2>
 
 <p>
-예산을 입력하고 추천받아 보세요.
+조건을 입력하면 적합한 차량을 추천합니다.
 </p>
 
 
@@ -250,11 +239,20 @@ AI가 사용자의 조건에 맞는 자동차를 추천합니다.
 </select>
 
 
+<select id="life">
+
+<option>가족</option>
+<option>출퇴근</option>
+<option>캠핑</option>
+
+</select>
+
+
 <br>
 
 
 <button onclick="recommend()">
-추천받기
+AI 추천받기
 </button>
 
 
@@ -275,12 +273,24 @@ href="https://expo.dev/artifacts/eas/9aDlJcZEWwXXdSC_2Gj1kH_v2ckUEl9ri7m5dQYRihk
 
 
 
+<div class="card">
+
+<h2>📲 QR 코드</h2>
+
+<p>
+스마트폰으로 QR을 스캔하면 접속할 수 있습니다.
+</p>
+
+<!-- QR 이미지 넣는 곳 -->
+<!-- <img class="qr" src="qr.png"> -->
+
+</div>
+
+
 
 <footer>
 
-<p>
 React Native + Expo 제작
-</p>
 
 </footer>
 
@@ -290,17 +300,19 @@ React Native + Expo 제작
 
 
 
+
 <script>
 
 function recommend(){
 
-
 let money =
 Number(document.getElementById("money").value);
 
-
 let type =
 document.getElementById("type").value;
+
+let life =
+document.getElementById("life").value;
 
 
 let result =
@@ -308,40 +320,53 @@ document.getElementById("result");
 
 
 
-if(type=="SUV" && money>=2500){
+if(life=="캠핑" || type=="SUV"){
 
 result.innerHTML =
-"🚙 추천 차량 : 현대 투싼<br>실용적인 SUV와 적합한 예산입니다.";
+"🚙 추천 차량 : 현대 투싼<br><br>" +
+"추천 이유 : 넓은 공간과 활용성이 캠핑 라이프스타일에 적합합니다.";
 
 }
 
-else if(type=="세단" && money>=3000){
+
+else if(life=="가족"){
 
 result.innerHTML =
-"🚗 추천 차량 : 현대 그랜저<br>편안한 세단을 원하는 사용자에게 추천합니다.";
+"🚘 추천 차량 : 기아 쏘렌토<br><br>" +
+"추천 이유 : 가족 이동에 적합한 넓은 공간과 안정성을 제공합니다.";
 
 }
+
+
+else if(life=="출퇴근" || type=="세단"){
+
+result.innerHTML =
+"🚗 추천 차량 : 현대 아반떼<br><br>" +
+"추천 이유 : 좋은 연비와 편안한 주행으로 출퇴근에 적합합니다.";
+
+}
+
 
 else if(type=="경차"){
 
 result.innerHTML =
-"🚘 추천 차량 : 기아 모닝<br>경제적인 차량을 추천합니다.";
+"🚗 추천 차량 : 기아 모닝<br><br>" +
+"추천 이유 : 경제적인 유지비와 실용성이 장점입니다.";
 
 }
+
 
 else {
 
 result.innerHTML =
-"조건에 맞는 차량을 찾는 중입니다.<br>예산을 조금 높여보세요.";
+"입력 조건을 분석하여 추천 차량을 준비합니다.";
 
 }
 
 
 }
-
 
 </script>
-
 
 
 </body>

@@ -7,7 +7,6 @@ import {
   Pressable,
   ScrollView,
   ActivityIndicator,
-  Platform,
 } from "react-native";
 
 // 아이폰 Expo Go에서 접속할 때 사용할 컴퓨터 IP
@@ -15,10 +14,7 @@ import {
 // 아래 IP를 172.20.10.2로 맞추면 됨
 const SERVER_IP = " 10.30.131.129";
 
-const API_URL = 
-  Platform.OS === "web"
-    ? "http://localhost:3000/recommend"
-    : `http://${SERVER_IP}:3000/recommend`;
+const API_URL = "https://car-ai-recommend-app-production.up.railway.app/recommend";
 
 export default function App() {
   const [lifestyle, setLifestyle] = useState("");

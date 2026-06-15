@@ -4,81 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI 자동차 추천 앱</title>
+<title>AI 자동차 추천</title>
 
 <style>
 
 body {
     font-family: Arial, sans-serif;
-    margin:0;
     background:#f4f7fb;
-    color:#222;
+    margin:0;
+    text-align:center;
+    padding:30px;
 }
 
 .container {
-    max-width:900px;
+    max-width:600px;
     margin:auto;
-    padding:40px 20px;
-    text-align:center;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px #ccc;
 }
 
 h1 {
-    font-size:42px;
+    color:#2563eb;
 }
 
-.subtitle {
-    font-size:20px;
-    color:#555;
-}
-
-.card {
-    background:white;
-    padding:25px;
-    margin-top:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+.car {
+    font-size:80px;
 }
 
 
-.features {
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-
-.feature {
-    background:#eef2ff;
-    padding:20px;
+input {
+    width:90%;
+    padding:15px;
+    margin:10px;
     border-radius:10px;
-    width:180px;
-}
-
-
-input, select {
-    padding:12px;
-    margin:8px;
-    border-radius:8px;
     border:1px solid #ccc;
+    font-size:16px;
 }
 
 
 button {
-    padding:12px 25px;
+    padding:15px 30px;
+    margin-top:15px;
     background:#2563eb;
     color:white;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
+    border:0;
+    border-radius:12px;
     font-size:16px;
+    cursor:pointer;
+}
+
+
+button:hover {
+    background:#1d4ed8;
+}
+
+
+.result {
+    margin-top:25px;
+    padding:20px;
+    background:#eef2ff;
+    border-radius:15px;
 }
 
 
 .download {
     display:inline-block;
-    margin-top:25px;
-    padding:15px 30px;
+    margin-top:20px;
+    padding:15px 25px;
     background:#16a34a;
     color:white;
     text-decoration:none;
@@ -86,62 +80,9 @@ button {
 }
 
 
-
-/* 자동차 모형 */
-
-.car {
-    width:220px;
-    height:100px;
-    margin:30px auto;
-    position:relative;
-}
-
-.body {
-    position:absolute;
-    width:180px;
-    height:55px;
-    background:#2563eb;
-    bottom:20px;
-    left:20px;
-    border-radius:25px 35px 10px 10px;
-}
-
-.window {
-    position:absolute;
-    width:80px;
-    height:30px;
-    background:#bfdbfe;
-    top:10px;
-    left:70px;
-    border-radius:10px;
-}
-
-.wheel {
-    position:absolute;
-    width:35px;
-    height:35px;
-    background:#111;
-    border-radius:50%;
-    bottom:0;
-}
-
-.left {
-    left:45px;
-}
-
-.right {
-    right:45px;
-}
-
-
 .qr {
     width:200px;
-}
-
-
-footer {
-    margin-top:40px;
-    color:#777;
+    margin-top:20px;
 }
 
 </style>
@@ -155,164 +96,100 @@ footer {
 
 
 <div class="car">
-
-<div class="body">
-<div class="window"></div>
-</div>
-
-<div class="wheel left"></div>
-<div class="wheel right"></div>
-
+🚗
 </div>
 
 
-<h1>🚗 AI 자동차 추천 앱</h1>
+<h1>🤖 AI 자동차 추천</h1>
 
-<p class="subtitle">
-사용자의 조건과 라이프스타일을 분석하여
-최적의 자동차를 추천합니다.
-</p>
-
-
-
-<div class="card">
-
-<h2>서비스 소개</h2>
 
 <p>
-AI 기반 자동차 추천 서비스로
-예산, 선호 차종, 생활 패턴을 분석합니다.
+예산, 차량 용도, 라이프스타일을 분석하여
+나에게 맞는 자동차를 추천합니다.
 </p>
 
+
+
+<h3>💰 예산</h3>
+
+<input 
+id="budget"
+placeholder="예: 3000만원">
+
+
+<h3>🚘 차량 용도</h3>
+
+<input 
+id="purpose"
+placeholder="예: 출퇴근, 가족용, 여행">
+
+
+<h3>🏠 라이프스타일</h3>
+
+<input 
+id="life"
+placeholder="예: 캠핑, 친환경, 편안함">
+
+
+<button onclick="recommend()">
+AI 자동차 추천 받기
+</button>
+
+
+
+<div class="result" id="result">
+
+추천 결과가 표시됩니다.
+
 </div>
 
 
 
 
-<div class="card">
-
-<h2>주요 기능</h2>
-
-<div class="features">
-
-<div class="feature">
-🤖 AI 추천<br>
-맞춤 차량 분석
-</div>
-
-<div class="feature">
-💰 예산 분석<br>
-가격 조건 비교
-</div>
-
-<div class="feature">
-🏠 라이프스타일<br>
-사용 목적 분석
-</div>
-
-</div>
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<h2>🤖 AI 자동차 추천</h2>
+<h2>📱 앱 다운로드</h2>
 
 <p>
-조건을 입력하면 적합한 차량을 추천합니다.
+QR 코드를 스캔하면 홈페이지에 접속할 수 있습니다.
 </p>
 
 
-<input id="money" placeholder="예산 (만원)">
+<img class="qr" src="qr.png">
 
-
-<select id="type">
-
-<option>SUV</option>
-<option>세단</option>
-<option>경차</option>
-
-</select>
-
-
-<select id="life">
-
-<option>가족</option>
-<option>출퇴근</option>
-<option>캠핑</option>
-
-</select>
 
 
 <br>
 
 
-<button onclick="recommend()">
-AI 추천받기
-</button>
-
-
-<h3 id="result"></h3>
-
-
-</div>
-
-
-
-
 <a class="download"
 href="https://expo.dev/artifacts/eas/9aDlJcZEWwXXdSC_2Gj1kH_v2ckUEl9ri7m5dQYRihk.apk">
 
-📱 Android APK 다운로드
+Android APK 다운로드
 
 </a>
 
 
 
-<div class="card">
-
-<h2>📲 QR 코드</h2>
-
-<p>
-스마트폰으로 QR을 스캔하면 접속할 수 있습니다.
-</p>
-
-<!-- QR 이미지 넣는 곳 -->
-<!-- <img class="qr" src="qr.png"> -->
-
 </div>
-
-
-
-<footer>
-
-React Native + Expo 제작
-
-</footer>
-
-
-
-</div>
-
 
 
 
 <script>
 
+
 function recommend(){
 
-let money =
-Number(document.getElementById("money").value);
 
-let type =
-document.getElementById("type").value;
+let budget =
+document.getElementById("budget").value;
+
+
+let purpose =
+document.getElementById("purpose").value;
+
 
 let life =
 document.getElementById("life").value;
+
 
 
 let result =
@@ -320,51 +197,67 @@ document.getElementById("result");
 
 
 
-if(life=="캠핑" || type=="SUV"){
+let car="";
+
+
+
+if(life.includes("캠핑") || purpose.includes("여행")){
+
+car="🚙 현대 투싼 / 기아 쏘렌토";
+
+}
+
+else if(life.includes("친환경")){
+
+car="⚡ 현대 아이오닉 / 기아 EV";
+
+}
+
+else if(purpose.includes("출퇴근")){
+
+car="🚗 현대 아반떼 / 기아 K3";
+
+}
+
+else if(purpose.includes("가족")){
+
+car="🚘 기아 쏘렌토 / 현대 싼타페";
+
+}
+
+else{
+
+car="🚗 현대 그랜저 / 기아 K8";
+
+}
+
+
 
 result.innerHTML =
-"🚙 추천 차량 : 현대 투싼<br><br>" +
-"추천 이유 : 넓은 공간과 활용성이 캠핑 라이프스타일에 적합합니다.";
+
+`
+<h3>AI 추천 결과</h3>
+
+예산 : ${budget}<br>
+차량 용도 : ${purpose}<br>
+라이프스타일 : ${life}
+
+<br><br>
+
+추천 차량:
+
+<br>
+
+<b>${car}</b>
+
+<br><br>
+
+입력하신 조건을 기반으로 추천되었습니다.
+
+`;
 
 }
 
-
-else if(life=="가족"){
-
-result.innerHTML =
-"🚘 추천 차량 : 기아 쏘렌토<br><br>" +
-"추천 이유 : 가족 이동에 적합한 넓은 공간과 안정성을 제공합니다.";
-
-}
-
-
-else if(life=="출퇴근" || type=="세단"){
-
-result.innerHTML =
-"🚗 추천 차량 : 현대 아반떼<br><br>" +
-"추천 이유 : 좋은 연비와 편안한 주행으로 출퇴근에 적합합니다.";
-
-}
-
-
-else if(type=="경차"){
-
-result.innerHTML =
-"🚗 추천 차량 : 기아 모닝<br><br>" +
-"추천 이유 : 경제적인 유지비와 실용성이 장점입니다.";
-
-}
-
-
-else {
-
-result.innerHTML =
-"입력 조건을 분석하여 추천 차량을 준비합니다.";
-
-}
-
-
-}
 
 </script>
 

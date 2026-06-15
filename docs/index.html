@@ -3,82 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AI 자동차 추천 앱</title>
 
 <style>
+
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f5f7fb;
-    color: #222;
+    margin:0;
+    background:#f4f7fb;
+    color:#222;
 }
 
 .container {
-    max-width: 900px;
-    margin: auto;
-    padding: 40px 20px;
-    text-align: center;
+    max-width:900px;
+    margin:auto;
+    padding:40px 20px;
+    text-align:center;
 }
 
 h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
+    font-size:42px;
 }
 
 .subtitle {
-    font-size: 20px;
-    color: #555;
+    font-size:20px;
+    color:#555;
 }
+
 
 .card {
-    background: white;
-    padding: 25px;
-    margin-top: 25px;
-    border-radius: 15px;
+    background:white;
+    padding:25px;
+    margin-top:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
+
 
 .features {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
 }
+
 
 .feature {
-    background: #eef2ff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 200px;
+    background:#eef2ff;
+    padding:20px;
+    border-radius:10px;
+    width:180px;
 }
 
-.button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 30px;
-    background: #2563eb;
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 18px;
+
+input, select {
+    padding:12px;
+    margin:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
 }
+
+
+button {
+    padding:12px 25px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+
+button:hover {
+    background:#1d4ed8;
+}
+
+
+.download {
+    display:inline-block;
+    margin-top:25px;
+    padding:15px 30px;
+    background:#16a34a;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+}
+
+
+/* 자동차 모형 */
+
+.car {
+    width:220px;
+    height:100px;
+    margin:30px auto;
+    position:relative;
+}
+
+
+.body {
+    position:absolute;
+    width:180px;
+    height:55px;
+    background:#2563eb;
+    bottom:20px;
+    left:20px;
+    border-radius:25px 35px 10px 10px;
+}
+
+
+.window {
+    position:absolute;
+    width:80px;
+    height:30px;
+    background:#bfdbfe;
+    top:10px;
+    left:70px;
+    border-radius:10px;
+}
+
+
+.wheel {
+    position:absolute;
+    width:35px;
+    height:35px;
+    background:#111;
+    border-radius:50%;
+    bottom:0;
+}
+
+
+.left {
+    left:45px;
+}
+
+
+.right {
+    right:45px;
+}
+
 
 footer {
-    margin-top: 40px;
-    color: #777;
+    margin-top:40px;
+    color:#777;
 }
+
 </style>
 
 </head>
 
+
 <body>
 
+
 <div class="container">
+
+
+<div class="car">
+
+<div class="body">
+<div class="window"></div>
+</div>
+
+<div class="wheel left"></div>
+<div class="wheel right"></div>
+
+</div>
+
 
 <h1>🚗 AI 자동차 추천 앱</h1>
 
 <p class="subtitle">
-AI가 사용자의 조건에 맞는 자동차를 추천해주는 서비스
+AI가 사용자의 조건에 맞는 자동차를 추천합니다.
 </p>
+
 
 
 <div class="card">
@@ -86,53 +185,164 @@ AI가 사용자의 조건에 맞는 자동차를 추천해주는 서비스
 <h2>서비스 소개</h2>
 
 <p>
-사용자의 예산, 선호 조건을 분석하여
-적합한 자동차를 추천합니다.
+예산과 선호 조건을 분석하여
+가장 적합한 자동차를 추천하는 서비스입니다.
 </p>
 
 </div>
+
+
 
 
 <div class="card">
 
 <h2>주요 기능</h2>
 
+
 <div class="features">
 
 <div class="feature">
 🤖 AI 추천<br>
-맞춤형 차량 추천
+맞춤 차량 추천
 </div>
+
 
 <div class="feature">
 💰 예산 분석<br>
-가격 조건 비교
+가격 비교
 </div>
+
 
 <div class="feature">
 🚘 차량 정보<br>
 차량 특징 분석
 </div>
 
-</div>
 
 </div>
 
+</div>
 
-<a class="button" 
+
+
+
+
+<div class="card">
+
+
+<h2>🚘 자동차 추천 체험</h2>
+
+
+<p>
+예산을 입력하고 추천받아 보세요.
+</p>
+
+
+<input id="money" placeholder="예산 (만원)">
+
+
+<select id="type">
+
+<option>SUV</option>
+<option>세단</option>
+<option>경차</option>
+
+</select>
+
+
+<br>
+
+
+<button onclick="recommend()">
+추천받기
+</button>
+
+
+<h3 id="result"></h3>
+
+
+</div>
+
+
+
+
+<a class="download"
 href="https://expo.dev/artifacts/eas/9aDlJcZEWwXXdSC_2Gj1kH_v2ckUEl9ri7m5dQYRihk.apk">
-Android APK 다운로드
+
+📱 Android APK 다운로드
+
 </a>
 
 
+
+
 <footer>
+
 <p>
-Built with React Native + Expo
+React Native + Expo 제작
 </p>
+
 </footer>
 
 
+
 </div>
+
+
+
+<script>
+
+function recommend(){
+
+
+let money =
+Number(document.getElementById("money").value);
+
+
+let type =
+document.getElementById("type").value;
+
+
+let result =
+document.getElementById("result");
+
+
+
+if(type=="SUV" && money>=2500){
+
+result.innerHTML =
+"🚙 추천 차량 : 현대 투싼<br>실용적인 SUV와 적합한 예산입니다.";
+
+}
+
+else if(type=="세단" && money>=3000){
+
+result.innerHTML =
+"🚗 추천 차량 : 현대 그랜저<br>편안한 세단을 원하는 사용자에게 추천합니다.";
+
+}
+
+else if(type=="경차"){
+
+result.innerHTML =
+"🚘 추천 차량 : 기아 모닝<br>경제적인 차량을 추천합니다.";
+
+}
+
+else {
+
+result.innerHTML =
+"조건에 맞는 차량을 찾는 중입니다.<br>예산을 조금 높여보세요.";
+
+}
+
+
+}
+
+
+</script>
+
+
 
 </body>
 </html>

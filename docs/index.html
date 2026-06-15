@@ -1,12 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>AI Car Recommendation App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 자동차 추천 앱</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f7fb;
+    color: #222;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #555;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 15px;
+}
+
+.features {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.feature {
+    background: #eef2ff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 30px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+footer {
+    margin-top: 40px;
+    color: #777;
+}
+</style>
+
 </head>
+
 <body>
-    <h1>AI 자동차 추천 앱</h1>
-    <p>AI 기반 자동차 추천 서비스</p>
-    <p>Expo React Native로 제작한 앱입니다.</p>
+
+<div class="container">
+
+<h1>🚗 AI 자동차 추천 앱</h1>
+
+<p class="subtitle">
+AI가 사용자의 조건에 맞는 자동차를 추천해주는 서비스
+</p>
+
+
+<div class="card">
+
+<h2>서비스 소개</h2>
+
+<p>
+사용자의 예산, 선호 조건을 분석하여
+적합한 자동차를 추천합니다.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>주요 기능</h2>
+
+<div class="features">
+
+<div class="feature">
+🤖 AI 추천<br>
+맞춤형 차량 추천
+</div>
+
+<div class="feature">
+💰 예산 분석<br>
+가격 조건 비교
+</div>
+
+<div class="feature">
+🚘 차량 정보<br>
+차량 특징 분석
+</div>
+
+</div>
+
+</div>
+
+
+<a class="button" 
+href="https://expo.dev/artifacts/eas/9aDlJcZEWwXXdSC_2Gj1kH_v2ckUEl9ri7m5dQYRihk.apk">
+Android APK 다운로드
+</a>
+
+
+<footer>
+<p>
+Built with React Native + Expo
+</p>
+</footer>
+
+
+</div>
+
 </body>
 </html>

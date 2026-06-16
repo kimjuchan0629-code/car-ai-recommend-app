@@ -273,32 +273,70 @@ APK 다운로드
 
 function recommend(){
 
-
 let budget =
 document.getElementById("budget").value;
 
-
 let purpose =
 document.getElementById("purpose").value;
-
 
 let style =
 document.getElementById("style").value;
 
 
-
-let car="";
-
-let reason="";
+let result="";
 
 
+if(
+budget.includes("1억") ||
+budget.includes("10000") ||
+budget.includes("이상")
+){
 
 if(style.includes("SUV")){
 
+result =
+"🏆 AI 추천 TOP 3<br><br>" +
+"🥇 레인지로버<br>" +
+"🥈 벤츠 GLS<br>" +
+"🥉 BMW X7<br><br>" +
+"프리미엄 SUV와 높은 예산 조건을 반영했습니다.";
 
-car="🚙 현대 투싼 / 기아 쏘렌토";
+}
 
-reason="넓은 공간과 높은 활용성이 필요한 사용자에게 적합합니다.";
+else if(style.includes("세단")){
+
+result =
+"🏆 AI 추천 TOP 3<br><br>" +
+"🥇 벤츠 S클래스<br>" +
+"🥈 BMW 7시리즈<br>" +
+"🥉 제네시스 G90<br><br>" +
+"고급 세단 선호와 예산 조건을 반영했습니다.";
+
+}
+
+else{
+
+result =
+"🏆 AI 추천 TOP 3<br><br>" +
+"🥇 포르쉐 카이엔<br>" +
+"🥈 벤츠 AMG GT<br>" +
+"🥉 BMW M8<br><br>" +
+"고예산 사용자에게 적합한 차량입니다.";
+
+}
+
+}
+
+
+else if(style.includes("SUV")){
+
+
+result =
+"🏆 AI 추천 TOP 3<br><br>" +
+"🥇 현대 투싼<br>" +
+"🥈 기아 쏘렌토<br>" +
+"🥉 현대 싼타페<br><br>" +
+"실용성과 공간 활용성을 기준으로 추천했습니다.";
 
 }
 
@@ -306,9 +344,12 @@ reason="넓은 공간과 높은 활용성이 필요한 사용자에게 적합합
 else if(style.includes("세단")){
 
 
-car="🚗 현대 그랜저 / 기아 K8";
-
-reason="편안한 승차감과 안정적인 주행에 적합합니다.";
+result =
+"🏆 AI 추천 TOP 3<br><br>" +
+"🥇 현대 그랜저<br>" +
+"🥈 기아 K8<br>" +
+"🥉 현대 아반떼<br><br>" +
+"편안한 주행과 경제성을 고려했습니다.";
 
 }
 
@@ -316,9 +357,12 @@ reason="편안한 승차감과 안정적인 주행에 적합합니다.";
 else if(style.includes("전기차")){
 
 
-car="⚡ 현대 아이오닉5 / 기아 EV6";
-
-reason="친환경 운전과 최신 기술을 원하는 사용자에게 적합합니다.";
+result =
+"🏆 AI 추천 TOP 3<br><br>" +
+"🥇 현대 아이오닉5<br>" +
+"🥈 기아 EV6<br>" +
+"🥉 테슬라 모델Y<br><br>" +
+"친환경과 주행 성능을 고려했습니다.";
 
 }
 
@@ -326,47 +370,29 @@ reason="친환경 운전과 최신 기술을 원하는 사용자에게 적합합
 else{
 
 
-car="🚘 현대 싼타페 / 기아 K5";
-
-reason="입력 조건을 종합하여 추천한 차량입니다.";
+result =
+"🏆 AI 추천 TOP 3<br><br>" +
+"🥇 현대 그랜저<br>" +
+"🥈 기아 쏘렌토<br>" +
+"🥉 제네시스 G80<br><br>" +
+"입력 조건을 종합 분석했습니다.";
 
 }
 
 
 
-document.getElementById("result").innerHTML=
-
+document.getElementById("result").innerHTML =
 
 `
+${result}
 
-<h3>AI 추천 결과</h3>
+<br><br>
 
+입력 조건<br>
 예산 : ${budget}<br>
-
-차량 용도 : ${purpose}<br>
-
+용도 : ${purpose}<br>
 선호 차량 : ${style}
-
-<br><br>
-
-
-<strong>${car}</strong>
-
-<br><br>
-
-${reason}
 
 `;
 
-
-
 }
-
-
-</script>
-
-
-
-</body>
-
-</html>

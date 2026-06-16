@@ -8,82 +8,65 @@
 
 <style>
 
-body {
-    font-family: Arial, sans-serif;
-    background:#f4f7fb;
-    margin:0;
-    text-align:center;
-    padding:30px;
+body{
+font-family:Arial,sans-serif;
+background:#f3f6fb;
+text-align:center;
+padding:30px;
 }
 
-.container {
-    max-width:600px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 5px 20px #ccc;
+.box{
+max-width:600px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px #ccc;
 }
 
-h1 {
-    color:#2563eb;
+h1{
+color:#2563eb;
 }
 
-.car {
-    font-size:80px;
-}
-
-
-input {
-    width:90%;
-    padding:15px;
-    margin:10px;
-    border-radius:10px;
-    border:1px solid #ccc;
-    font-size:16px;
+.car{
+font-size:80px;
 }
 
 
-button {
-    padding:15px 30px;
-    margin-top:15px;
-    background:#2563eb;
-    color:white;
-    border:0;
-    border-radius:12px;
-    font-size:16px;
-    cursor:pointer;
+input{
+width:90%;
+padding:14px;
+margin:10px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
 }
 
 
-button:hover {
-    background:#1d4ed8;
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:15px 30px;
+border-radius:10px;
+font-size:17px;
+cursor:pointer;
 }
 
 
-.result {
-    margin-top:25px;
-    padding:20px;
-    background:#eef2ff;
-    border-radius:15px;
+.result{
+margin-top:25px;
+background:#eef2ff;
+padding:20px;
+border-radius:15px;
 }
 
 
-.download {
-    display:inline-block;
-    margin-top:20px;
-    padding:15px 25px;
-    background:#16a34a;
-    color:white;
-    text-decoration:none;
-    border-radius:10px;
+.qr{
+width:220px;
+margin-top:20px;
 }
 
-
-.qr {
-    width:200px;
-    margin-top:20px;
-}
 
 </style>
 
@@ -92,81 +75,59 @@ button:hover {
 
 <body>
 
-<div class="container">
+
+<div class="box">
 
 
-<div class="car">
-🚗
-</div>
+<div class="car">🚗</div>
 
 
 <h1>🤖 AI 자동차 추천</h1>
 
-
 <p>
-예산, 차량 용도, 라이프스타일을 분석하여
-나에게 맞는 자동차를 추천합니다.
+나의 조건을 입력하면 AI가 맞춤 자동차를 추천합니다.
 </p>
 
 
 
 <h3>💰 예산</h3>
 
-<input 
-id="budget"
-placeholder="예: 3000만원">
+<input id="budget"
+placeholder="예: 4000만원">
+
 
 
 <h3>🚘 차량 용도</h3>
 
-<input 
-id="purpose"
+<input id="purpose"
 placeholder="예: 출퇴근, 가족용, 여행">
 
 
-<h3>🏠 라이프스타일</h3>
 
-<input 
-id="life"
-placeholder="예: 캠핑, 친환경, 편안함">
+<h3>⭐ 선호 차량</h3>
+
+<input id="style"
+placeholder="예: SUV, 세단, 전기차, 스포츠카">
+
 
 
 <button onclick="recommend()">
-AI 자동차 추천 받기
+AI 자동차 추천
 </button>
 
 
 
 <div class="result" id="result">
 
-추천 결과가 표시됩니다.
+추천 결과가 여기에 표시됩니다.
 
 </div>
 
 
 
+<h2>📱 홈페이지 QR</h2>
 
-<h2>📱 앱 다운로드</h2>
-
-<p>
-QR 코드를 스캔하면 홈페이지에 접속할 수 있습니다.
-</p>
-
-
-<img class="qr" src="qr.png">
-
-
-
-<br>
-
-
-<a class="download"
-href="https://expo.dev/artifacts/eas/9aDlJcZEWwXXdSC_2Gj1kH_v2ckUEl9ri7m5dQYRihk.apk">
-
-Android APK 다운로드
-
-</a>
-
+<img class="qr" src="./qr.png">
 
 
 </div>
@@ -187,13 +148,8 @@ let purpose =
 document.getElementById("purpose").value;
 
 
-let life =
-document.getElementById("life").value;
-
-
-
-let result =
-document.getElementById("result");
+let style =
+document.getElementById("style").value;
 
 
 
@@ -201,58 +157,55 @@ let car="";
 
 
 
-if(life.includes("캠핑") || purpose.includes("여행")){
+if(style.includes("SUV")){
 
 car="🚙 현대 투싼 / 기아 쏘렌토";
 
 }
 
-else if(life.includes("친환경")){
-
-car="⚡ 현대 아이오닉 / 기아 EV";
-
-}
-
-else if(purpose.includes("출퇴근")){
-
-car="🚗 현대 아반떼 / 기아 K3";
-
-}
-
-else if(purpose.includes("가족")){
-
-car="🚘 기아 쏘렌토 / 현대 싼타페";
-
-}
-
-else{
+else if(style.includes("세단")){
 
 car="🚗 현대 그랜저 / 기아 K8";
 
 }
 
+else if(style.includes("전기차")){
+
+car="⚡ 현대 아이오닉5 / 기아 EV6";
+
+}
+
+else if(style.includes("스포츠카")){
+
+car="🏎️ 제네시스 쿠페 / 스포츠 모델";
+
+}
+
+else{
+
+car="🚘 현대 싼타페 / 기아 K5";
+
+}
 
 
-result.innerHTML =
 
-`
+document.getElementById("result").innerHTML=`
+
 <h3>AI 추천 결과</h3>
 
 예산 : ${budget}<br>
-차량 용도 : ${purpose}<br>
-라이프스타일 : ${life}
+
+용도 : ${purpose}<br>
+
+선호 차량 : ${style}
 
 <br><br>
 
 추천 차량:
 
-<br>
+<h2>${car}</h2>
 
-<b>${car}</b>
-
-<br><br>
-
-입력하신 조건을 기반으로 추천되었습니다.
+조건에 맞는 차량을 추천했습니다.
 
 `;
 

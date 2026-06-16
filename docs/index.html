@@ -8,80 +8,68 @@
 
 <title>AI 자동차 추천</title>
 
-
 <style>
 
 body{
-    font-family:Arial,sans-serif;
-    background:#f4f7fb;
-    text-align:center;
-    padding:30px;
+font-family:Arial,sans-serif;
+background:#f4f7fb;
+text-align:center;
+padding:30px;
 }
-
 
 .container{
-    max-width:650px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 5px 20px #ccc;
+max-width:650px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px #ccc;
 }
-
 
 h1{
-    color:#2563eb;
+color:#2563eb;
 }
-
 
 .car{
-    font-size:90px;
-}
-
-
-p{
-    color:#555;
+font-size:90px;
 }
 
 
 input{
 
-    width:90%;
-    padding:15px;
-    margin:10px;
+width:90%;
+padding:15px;
+margin:10px;
 
-    border-radius:10px;
-    border:1px solid #ccc;
+border-radius:10px;
+border:1px solid #ccc;
 
-    font-size:16px;
+font-size:16px;
 
 }
-
 
 
 button{
 
-    background:#2563eb;
+background:#2563eb;
+color:white;
 
-    color:white;
+border:none;
 
-    border:none;
+padding:15px 30px;
 
-    padding:15px 30px;
+border-radius:12px;
 
-    border-radius:12px;
+font-size:17px;
 
-    font-size:17px;
-
-    cursor:pointer;
+cursor:pointer;
 
 }
 
 
-
 button:hover{
 
-    background:#1d4ed8;
+background:#1d4ed8;
 
 }
 
@@ -89,23 +77,13 @@ button:hover{
 
 .result{
 
-    margin-top:25px;
+margin-top:25px;
 
-    background:#eef2ff;
+background:#eef2ff;
 
-    padding:20px;
+padding:20px;
 
-    border-radius:15px;
-
-}
-
-
-
-.qr{
-
-    width:220px;
-
-    margin-top:15px;
+border-radius:15px;
 
 }
 
@@ -113,21 +91,21 @@ button:hover{
 
 .download{
 
-    display:inline-block;
+display:inline-block;
 
-    margin-top:20px;
+margin-top:20px;
 
-    background:#16a34a;
+background:#16a34a;
 
-    color:white;
+color:white;
 
-    padding:15px 30px;
+padding:15px 30px;
 
-    border-radius:12px;
+border-radius:12px;
 
-    text-decoration:none;
+text-decoration:none;
 
-    font-size:18px;
+font-size:18px;
 
 }
 
@@ -135,23 +113,21 @@ button:hover{
 
 .card{
 
-    margin-top:30px;
+margin-top:30px;
 
-    padding:20px;
+padding:20px;
 
-    background:#fafafa;
+background:#fafafa;
 
-    border-radius:15px;
+border-radius:15px;
 
 }
-
 
 
 </style>
 
 
 </head>
-
 
 
 <body>
@@ -171,8 +147,9 @@ button:hover{
 
 <p>
 예산, 차량 용도, 선호 차량을 분석하여
-나에게 맞는 자동차를 추천합니다.
+나에게 맞는 자동차 TOP 3를 추천합니다.
 </p>
+
 
 
 
@@ -182,19 +159,22 @@ button:hover{
 <h3>💰 예산</h3>
 
 <input id="budget"
-placeholder="예: 4000만원">
+placeholder="예: 3000만원 / 1억 이상">
+
 
 
 <h3>🚘 차량 용도</h3>
 
 <input id="purpose"
-placeholder="예: 출퇴근, 가족용, 여행">
+placeholder="예: 출퇴근 / 가족용 / 여행">
+
 
 
 <h3>⭐ 선호 차량</h3>
 
 <input id="style"
-placeholder="예: SUV, 세단, 전기차">
+placeholder="예: SUV / 세단 / 전기차">
+
 
 
 <button onclick="recommend()">
@@ -212,6 +192,7 @@ AI 자동차 추천 받기
 </div>
 
 
+
 </div>
 
 
@@ -225,8 +206,9 @@ AI 자동차 추천 받기
 
 
 <p>
-버튼을 누르면 APK 다운로드 페이지로 이동합니다.
+APK 파일을 다운로드하여 앱을 설치할 수 있습니다.
 </p>
+
 
 
 <a class="download"
@@ -242,28 +224,8 @@ APK 다운로드
 
 
 
-
-
-<div class="card">
-
-
-<h2>📱 홈페이지 QR</h2>
-
-
-<p>
-스마트폰으로 QR을 스캔하면 접속할 수 있습니다.
-</p>
-
-
-<img class="qr" src="qr.png" alt="QR 코드">
-
-
 </div>
 
-
-
-
-</div>
 
 
 
@@ -273,18 +235,25 @@ APK 다운로드
 
 function recommend(){
 
+
 let budget =
 document.getElementById("budget").value;
 
+
 let purpose =
 document.getElementById("purpose").value;
+
 
 let style =
 document.getElementById("style").value;
 
 
+
 let result="";
 
+
+
+// 1억 이상
 
 if(
 budget.includes("1억") ||
@@ -292,54 +261,67 @@ budget.includes("10000") ||
 budget.includes("이상")
 ){
 
+
 if(style.includes("SUV")){
+
 
 result =
 "🏆 AI 추천 TOP 3<br><br>" +
 "🥇 레인지로버<br>" +
-"🥈 벤츠 GLS<br>" +
-"🥉 BMW X7<br><br>" +
+"🥈 BMW X7<br>" +
+"🥉 벤츠 GLS<br><br>" +
 "프리미엄 SUV와 높은 예산 조건을 반영했습니다.";
 
 }
 
+
 else if(style.includes("세단")){
+
 
 result =
 "🏆 AI 추천 TOP 3<br><br>" +
 "🥇 벤츠 S클래스<br>" +
 "🥈 BMW 7시리즈<br>" +
 "🥉 제네시스 G90<br><br>" +
-"고급 세단 선호와 예산 조건을 반영했습니다.";
+"고급 세단 조건을 반영했습니다.";
 
 }
 
+
 else{
+
 
 result =
 "🏆 AI 추천 TOP 3<br><br>" +
 "🥇 포르쉐 카이엔<br>" +
 "🥈 벤츠 AMG GT<br>" +
 "🥉 BMW M8<br><br>" +
-"고예산 사용자에게 적합한 차량입니다.";
+"고예산 사용자 추천입니다.";
 
 }
 
+
 }
 
+
+
+// SUV
 
 else if(style.includes("SUV")){
 
 
 result =
 "🏆 AI 추천 TOP 3<br><br>" +
-"🥇 현대 투싼<br>" +
-"🥈 기아 쏘렌토<br>" +
-"🥉 현대 싼타페<br><br>" +
-"실용성과 공간 활용성을 기준으로 추천했습니다.";
+"🥇 기아 쏘렌토<br>" +
+"🥈 현대 싼타페<br>" +
+"🥉 현대 투싼<br><br>" +
+"공간성과 활용성을 고려했습니다.";
 
 }
 
+
+
+// 세단
 
 else if(style.includes("세단")){
 
@@ -349,12 +331,18 @@ result =
 "🥇 현대 그랜저<br>" +
 "🥈 기아 K8<br>" +
 "🥉 현대 아반떼<br><br>" +
-"편안한 주행과 경제성을 고려했습니다.";
+"편안한 승차감과 경제성을 고려했습니다.";
 
 }
 
 
-else if(style.includes("전기차")){
+
+// 전기차
+
+else if(
+style.includes("전기") ||
+style.includes("EV")
+){
 
 
 result =
@@ -362,10 +350,29 @@ result =
 "🥇 현대 아이오닉5<br>" +
 "🥈 기아 EV6<br>" +
 "🥉 테슬라 모델Y<br><br>" +
-"친환경과 주행 성능을 고려했습니다.";
+"친환경 차량 조건을 반영했습니다.";
 
 }
 
+
+
+// 가족
+
+else if(purpose.includes("가족")){
+
+
+result =
+"🏆 AI 추천 TOP 3<br><br>" +
+"🥇 기아 쏘렌토<br>" +
+"🥈 현대 팰리세이드<br>" +
+"🥉 현대 싼타페<br><br>" +
+"가족용 공간성을 우선했습니다.";
+
+}
+
+
+
+// 기본
 
 else{
 
@@ -373,26 +380,43 @@ else{
 result =
 "🏆 AI 추천 TOP 3<br><br>" +
 "🥇 현대 그랜저<br>" +
-"🥈 기아 쏘렌토<br>" +
-"🥉 제네시스 G80<br><br>" +
+"🥈 기아 K5<br>" +
+"🥉 현대 투싼<br><br>" +
 "입력 조건을 종합 분석했습니다.";
 
 }
 
 
 
+
 document.getElementById("result").innerHTML =
 
 `
+
 ${result}
 
 <br><br>
 
+<hr>
+
 입력 조건<br>
-예산 : ${budget}<br>
-용도 : ${purpose}<br>
-선호 차량 : ${style}
+
+💰 ${budget}<br>
+
+🚘 ${purpose}<br>
+
+⭐ ${style}
 
 `;
 
+
+
 }
+
+
+</script>
+
+
+</body>
+
+</html>

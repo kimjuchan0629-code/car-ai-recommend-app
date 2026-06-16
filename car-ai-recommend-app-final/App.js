@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -6,242 +7,350 @@ import {
   TextInput,
   Pressable,
   ScrollView,
-  ActivityIndicator,
 } from "react-native";
 
-// 아이폰 Expo Go에서 접속할 때 사용할 컴퓨터 IP
-// Expo 실행 로그에 Metro: exp://172.20.10.2:xxxx 처럼 뜨면
-// 아래 IP를 172.20.10.2로 맞추면 됨
-const SERVER_IP = " 10.30.131.129";
 
-const API_URL = "https://car-ai-recommend-app-production.up.railway.app/recommend";
+export default function App(){
 
-export default function App() {
-  const [lifestyle, setLifestyle] = useState("");
-  const [budget, setBudget] = useState("");
-  const [carType, setCarType] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState("");
+const [budget,setBudget] = useState("");
+const [purpose,setPurpose] = useState("");
+const [favorite,setFavorite] = useState("");
 
-  const handleRecommend = async () => {
-  if (!lifestyle || !budget || !carType) {
-    setResult("라이프스타일, 예산, 선호 차종을 모두 입력해주세요.");
-    return;
-  }
+const [result,setResult] = useState([]);
 
-  setLoading(true);
-  setResult("");
 
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
 
-        // localtunnel 안내 페이지 때문에 막히는 경우를 줄이기 위한 헤더
-        "bypass-tunnel-reminder": "true",
-      },
-      body: JSON.stringify({
-        lifestyle,
-        budget,
-        carType,
-      }),
-    });
+const cars = [
 
-    const responseText = await response.text();
+{
+name:"현대 아반떼",
+price:2000,
+type:"세단",
+purpose:"출퇴근",
+reason:"경제적인 유지비와 실용성"
+},
 
-    let data;
-    try {
-      data = JSON.parse(responseText);
-    } catch (e) {
-      throw new Error(
-        "서버가 JSON이 아닌 응답을 보냈습니다.\n\n" +
-          responseText.slice(0, 300)
-      );
-    }
+{
+name:"기아 K3",
+price:2200,
+type:"세단",
+purpose:"출퇴근",
+reason:"합리적인 가격과 편안한 주행"
+},
 
-    if (!response.ok) {
-      throw new Error(
-        data.detail || data.error || "서버 오류가 발생했습니다."
-      );
-    }
+{
+name:"현대 베뉴",
+price:2300,
+type:"SUV",
+purpose:"출퇴근",
+reason:"작지만 활용성 높은 SUV"
+},
 
-    setResult(`${data.recommendation}\n\n사용된 AI 모델: ${data.modelUsed}`);
-  } catch (error) {
-    console.error(error);
+{
+name:"기아 셀토스",
+price:2800,
+type:"SUV",
+purpose:"여행",
+reason:"공간성과 실용성"
+},
 
-    setResult(
-      "AI 추천 중 오류가 발생했습니다.\n\n" +
-        "오류 내용:\n" +
-        `${error.message}\n\n` +
-        "확인할 것:\n" +
-        "1. 서버 터미널이 켜져 있는지 확인\n" +
-        "2. localtunnel 터미널이 켜져 있는지 확인\n" +
-        "3. App.js의 API_URL이 현재 localtunnel 주소와 같은지 확인"
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+{
+name:"현대 투싼",
+price:3500,
+type:"SUV",
+purpose:"가족",
+reason:"넓은 공간과 안전성"
+},
 
-  return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>AI 자동차 추천 서비스</Text>
+{
+name:"기아 쏘렌토",
+price:4500,
+type:"SUV",
+purpose:"가족",
+reason:"패밀리 SUV"
+},
 
-      <Text style={styles.subtitle}>
-        라이프스타일, 예산, 선호 차종을 입력하면 AI가 어울리는 차량을 추천해줍니다.
-      </Text>
+{
+name:"현대 그랜저",
+price:4500,
+type:"세단",
+purpose:"출퇴근",
+reason:"고급스러운 승차감"
+},
 
-      <View style={styles.card}>
-        <Text style={styles.label}>라이프스타일</Text>
-        <TextInput
-          style={[styles.input, styles.textArea]}
-          placeholder="예: 학교 통학용이고 주말에는 여자친구와 드라이브를 자주 갑니다."
-          value={lifestyle}
-          onChangeText={setLifestyle}
-          multiline
-          textAlignVertical="top"
-        />
+{
+name:"제네시스 G80",
+price:6000,
+type:"세단",
+purpose:"비즈니스",
+reason:"프리미엄 세단"
+},
 
-        <Text style={styles.label}>예산</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="예: 2,000만 원 이하 / 월 40만 원 이하 / 중고차 가능"
-          value={budget}
-          onChangeText={setBudget}
-        />
+{
+name:"벤츠 S클래스",
+price:15000,
+type:"세단",
+purpose:"비즈니스",
+reason:"최상급 럭셔리 세단"
+},
 
-        <Text style={styles.label}>선호 차종</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="예: 세단 / SUV / 경차 / 전기차 / 상관없음"
-          value={carType}
-          onChangeText={setCarType}
-        />
+{
+name:"BMW X7",
+price:14000,
+type:"SUV",
+purpose:"가족",
+reason:"프리미엄 대형 SUV"
+},
 
-        <Pressable
-          style={({ pressed }) => [
-            styles.button,
-            pressed && styles.buttonPressed,
-            loading && styles.buttonDisabled,
-          ]}
-          onPress={handleRecommend}
-          disabled={loading}
-        >
-          <Text style={styles.buttonText}>
-            {loading ? "AI 분석 중..." : "AI 차량 추천받기"}
-          </Text>
-        </Pressable>
-      </View>
+{
+name:"현대 아이오닉5",
+price:5000,
+type:"전기차",
+purpose:"친환경",
+reason:"전기차 기술과 효율성"
+},
 
-      {loading && (
-        <View style={styles.loadingBox}>
-          <ActivityIndicator size="large" />
-          <Text style={styles.loadingText}>AI가 차량을 분석하는 중...</Text>
-        </View>
-      )}
-
-      {result ? (
-        <View style={styles.resultBox}>
-          <Text style={styles.resultTitle}>추천 결과</Text>
-          <Text style={styles.resultText}>{result}</Text>
-        </View>
-      ) : null}
-    </ScrollView>
-  );
+{
+name:"기아 EV6",
+price:5500,
+type:"전기차",
+purpose:"친환경",
+reason:"스포티한 전기차"
 }
 
+];
+
+
+
+function recommend(){
+
+
+let budgetNumber =
+parseInt(
+budget.replace(/[^0-9]/g,"")
+) || 3000;
+
+
+
+let scored = cars.map(car=>{
+
+
+let score=0;
+
+
+// 예산 가까울수록 점수 증가
+
+let gap=Math.abs(car.price-budgetNumber);
+
+if(gap < 1000){
+score += 40;
+}
+else if(gap < 3000){
+score += 20;
+}
+
+
+
+// 선호 차량
+
+if(
+favorite.includes(car.type)
+){
+score += 35;
+}
+
+
+// 용도
+
+if(
+purpose.includes(car.purpose)
+){
+score += 25;
+}
+
+
+
+return {
+...car,
+score
+};
+
+
+});
+
+
+
+let top3 =
+scored
+.sort((a,b)=>b.score-a.score)
+.slice(0,3);
+
+
+
+setResult(top3);
+
+}
+
+
+
+return (
+
+<ScrollView style={styles.container}>
+
+
+<Text style={styles.title}>
+🚗 AI 자동차 추천
+</Text>
+
+
+<Text style={styles.info}>
+예산과 목적, 선호 차량을 분석하여
+TOP 3 차량을 추천합니다.
+</Text>
+
+
+
+<TextInput
+style={styles.input}
+placeholder="예산 (예: 3000만원)"
+value={budget}
+onChangeText={setBudget}
+/>
+
+
+<TextInput
+style={styles.input}
+placeholder="차량 용도 (예: 출퇴근, 가족)"
+value={purpose}
+onChangeText={setPurpose}
+/>
+
+
+<TextInput
+style={styles.input}
+placeholder="선호 차량 (예: SUV, 세단, 전기차)"
+value={favorite}
+onChangeText={setFavorite}
+/>
+
+
+
+<Pressable
+style={styles.button}
+onPress={recommend}
+>
+
+<Text style={styles.buttonText}>
+AI 추천 받기
+</Text>
+
+</Pressable>
+
+
+
+{
+result.map((car,index)=>(
+
+<View style={styles.card} key={car.name}>
+
+<Text style={styles.rank}>
+🏆 {index+1}위
+</Text>
+
+
+<Text style={styles.car}>
+{car.name}
+</Text>
+
+
+<Text>
+추천 점수 : {car.score}점
+</Text>
+
+
+<Text>
+추천 이유 : {car.reason}
+</Text>
+
+
+</View>
+
+))
+}
+
+
+
+</ScrollView>
+
+);
+
+}
+
+
+
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "#f5f6fa",
-    padding: 24,
-    paddingTop: 70,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "800",
-    color: "#111827",
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 15,
-    color: "#6b7280",
-    lineHeight: 22,
-    marginBottom: 24,
-  },
-  card: {
-    backgroundColor: "#ffffff",
-    borderRadius: 18,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  label: {
-    fontSize: 15,
-    fontWeight: "700",
-    color: "#111827",
-    marginBottom: 8,
-    marginTop: 14,
-  },
-  input: {
-    backgroundColor: "#f9fafb",
-    borderWidth: 1,
-    borderColor: "#e5e7eb",
-    borderRadius: 12,
-    padding: 14,
-    fontSize: 15,
-    minHeight: 48,
-    color: "#111827",
-  },
-  textArea: {
-    minHeight: 110,
-  },
-  button: {
-    backgroundColor: "#2563eb",
-    borderRadius: 14,
-    padding: 16,
-    marginTop: 22,
-    alignItems: "center",
-  },
-  buttonPressed: {
-    opacity: 0.85,
-  },
-  buttonDisabled: {
-    backgroundColor: "#93c5fd",
-  },
-  buttonText: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "800",
-  },
-  loadingBox: {
-    alignItems: "center",
-    marginTop: 24,
-  },
-  loadingText: {
-    marginTop: 10,
-    color: "#4b5563",
-  },
-  resultBox: {
-    backgroundColor: "#ffffff",
-    borderRadius: 18,
-    padding: 20,
-    marginTop: 24,
-    borderWidth: 1,
-    borderColor: "#e5e7eb",
-  },
-  resultTitle: {
-    fontSize: 20,
-    fontWeight: "800",
-    marginBottom: 12,
-    color: "#111827",
-  },
-  resultText: {
-    fontSize: 15,
-    lineHeight: 24,
-    color: "#374151",
-  },
+
+container:{
+flex:1,
+backgroundColor:"#f5f7fb",
+padding:25
+},
+
+title:{
+fontSize:30,
+fontWeight:"bold",
+textAlign:"center",
+marginTop:40
+},
+
+info:{
+textAlign:"center",
+margin:20
+},
+
+
+input:{
+backgroundColor:"white",
+padding:15,
+marginVertical:8,
+borderRadius:10,
+fontSize:16
+},
+
+
+button:{
+backgroundColor:"#2563eb",
+padding:16,
+borderRadius:12,
+marginTop:15
+},
+
+
+buttonText:{
+color:"white",
+textAlign:"center",
+fontSize:18,
+fontWeight:"bold"
+},
+
+
+card:{
+backgroundColor:"white",
+padding:20,
+marginTop:20,
+borderRadius:15
+},
+
+rank:{
+fontSize:18,
+fontWeight:"bold"
+},
+
+car:{
+fontSize:22,
+fontWeight:"bold",
+marginVertical:10
+}
+
+
 });

@@ -1,93 +1,182 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AI 자동차 추천</title>
 
+
 <style>
 
 body{
-font-family:Arial,sans-serif;
-background:#f3f6fb;
-text-align:center;
-padding:30px;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    text-align:center;
+    padding:30px;
 }
 
-.box{
-max-width:600px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 5px 20px #ccc;
+
+.container{
+    max-width:650px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px #ccc;
 }
+
 
 h1{
-color:#2563eb;
+    color:#2563eb;
 }
 
+
 .car{
-font-size:80px;
+    font-size:90px;
+}
+
+
+p{
+    color:#555;
 }
 
 
 input{
-width:90%;
-padding:14px;
-margin:10px;
-border-radius:10px;
-border:1px solid #ccc;
-font-size:16px;
+
+    width:90%;
+    padding:15px;
+    margin:10px;
+
+    border-radius:10px;
+    border:1px solid #ccc;
+
+    font-size:16px;
+
 }
+
 
 
 button{
-background:#2563eb;
-color:white;
-border:none;
-padding:15px 30px;
-border-radius:10px;
-font-size:17px;
-cursor:pointer;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 30px;
+
+    border-radius:12px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
 }
+
+
+
+button:hover{
+
+    background:#1d4ed8;
+
+}
+
 
 
 .result{
-margin-top:25px;
-background:#eef2ff;
-padding:20px;
-border-radius:15px;
+
+    margin-top:25px;
+
+    background:#eef2ff;
+
+    padding:20px;
+
+    border-radius:15px;
+
 }
+
 
 
 .qr{
-width:220px;
-margin-top:20px;
+
+    width:220px;
+
+    margin-top:15px;
+
 }
+
+
+
+.download{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    background:#16a34a;
+
+    color:white;
+
+    padding:15px 30px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+}
+
+
+
+.card{
+
+    margin-top:30px;
+
+    padding:20px;
+
+    background:#fafafa;
+
+    border-radius:15px;
+
+}
+
 
 
 </style>
 
+
 </head>
+
 
 
 <body>
 
 
-<div class="box">
+<div class="container">
 
 
-<div class="car">🚗</div>
+<div class="car">
+🚗
+</div>
+
 
 
 <h1>🤖 AI 자동차 추천</h1>
 
+
 <p>
-나의 조건을 입력하면 AI가 맞춤 자동차를 추천합니다.
+예산, 차량 용도, 선호 차량을 분석하여
+나에게 맞는 자동차를 추천합니다.
 </p>
 
+
+
+<div class="card">
 
 
 <h3>💰 예산</h3>
@@ -96,41 +185,86 @@ margin-top:20px;
 placeholder="예: 4000만원">
 
 
-
 <h3>🚘 차량 용도</h3>
 
 <input id="purpose"
 placeholder="예: 출퇴근, 가족용, 여행">
 
 
-
 <h3>⭐ 선호 차량</h3>
 
 <input id="style"
-placeholder="예: SUV, 세단, 전기차, 스포츠카">
-
+placeholder="예: SUV, 세단, 전기차">
 
 
 <button onclick="recommend()">
-AI 자동차 추천
+
+AI 자동차 추천 받기
+
 </button>
 
 
 
 <div class="result" id="result">
 
-추천 결과가 여기에 표시됩니다.
+추천 결과가 표시됩니다.
 
 </div>
 
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>📲 Android 앱 다운로드</h2>
+
+
+<p>
+버튼을 누르면 APK 다운로드 페이지로 이동합니다.
+</p>
+
+
+<a class="download"
+
+href="https://expo.dev/artifacts/eas/9aDlJcZEWwXXdSC_2Gj1kH_v2ckUEl9ri7m5dQYRihk.apk">
+
+APK 다운로드
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="card">
 
 
 <h2>📱 홈페이지 QR</h2>
 
-<img class="qr" src="./qr.png">
+
+<p>
+스마트폰으로 QR을 스캔하면 접속할 수 있습니다.
+</p>
+
+
+<img class="qr" src="qr.png" alt="QR 코드">
 
 
 </div>
+
+
+
+
+</div>
+
 
 
 
@@ -155,59 +289,76 @@ document.getElementById("style").value;
 
 let car="";
 
+let reason="";
+
 
 
 if(style.includes("SUV")){
 
+
 car="🚙 현대 투싼 / 기아 쏘렌토";
 
+reason="넓은 공간과 높은 활용성이 필요한 사용자에게 적합합니다.";
+
 }
+
 
 else if(style.includes("세단")){
 
+
 car="🚗 현대 그랜저 / 기아 K8";
 
+reason="편안한 승차감과 안정적인 주행에 적합합니다.";
+
 }
+
 
 else if(style.includes("전기차")){
 
+
 car="⚡ 현대 아이오닉5 / 기아 EV6";
 
-}
-
-else if(style.includes("스포츠카")){
-
-car="🏎️ 제네시스 쿠페 / 스포츠 모델";
+reason="친환경 운전과 최신 기술을 원하는 사용자에게 적합합니다.";
 
 }
+
 
 else{
 
+
 car="🚘 현대 싼타페 / 기아 K5";
+
+reason="입력 조건을 종합하여 추천한 차량입니다.";
 
 }
 
 
 
-document.getElementById("result").innerHTML=`
+document.getElementById("result").innerHTML=
+
+
+`
 
 <h3>AI 추천 결과</h3>
 
 예산 : ${budget}<br>
 
-용도 : ${purpose}<br>
+차량 용도 : ${purpose}<br>
 
 선호 차량 : ${style}
 
 <br><br>
 
-추천 차량:
 
-<h2>${car}</h2>
+<strong>${car}</strong>
 
-조건에 맞는 차량을 추천했습니다.
+<br><br>
+
+${reason}
 
 `;
+
+
 
 }
 
@@ -215,5 +366,7 @@ document.getElementById("result").innerHTML=`
 </script>
 
 
+
 </body>
+
 </html>
